@@ -1,0 +1,24 @@
+<% provide(:title, "All Categories") %>
+
+<h1>
+  Categories!
+</h1>
+
+<% if @categories.length > 0 %>
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= category.name %> ($<%= category.budget %>) - <%= category.description %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <h3>
+    No categories :(
+  </h3>
+<% end %>
+
+<p>
+  <%= link_to "Add a new category!", "/categories/new/" %>
+</p>
+<p>
+  <%= link_to "Edit your categories!", "/categories/edit/" %>
+</p>

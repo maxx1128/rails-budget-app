@@ -1,0 +1,21 @@
+<% provide(:title, "Add New Category") %>
+
+<h2>
+  Add a New Category
+</h2>
+
+<%= form_for(@category) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "New category" %>
+
+  <br>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, placeholder: "Describe your new category!" %>
+
+  <br>
+
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

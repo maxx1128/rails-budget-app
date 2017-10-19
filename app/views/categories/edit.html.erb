@@ -1,0 +1,42 @@
+<% provide(:title, "Edit Categories") %>
+
+<% if @categories.length > 0 %>
+  <h3>
+    Edit or remove your categories here!
+  </h3>
+
+  <p>
+    <%= link_to "Back to Categories", categories_url %>
+  </p>
+
+  <% @categories.each do |category| %>
+    <%= form_for(category, url: category_path(category)) do |f| %>
+      <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <br>
+
+        <%= f.label :budget %>
+        <%= f.text_field :budget, type: 'number', min: '1' %>
+
+        <br>
+
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+
+        <br>
+
+        <%= f.submit 'Update' %>
+
+        <%= link_to "Delete", category, method: :delete, data: { confirm: "You sure?" }, class: "delete_category" %>
+
+        <hr>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <h3>
+    No categories :(
+  </h3>
+<% end %>
