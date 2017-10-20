@@ -1,11 +1,17 @@
 class CategoriesController < ApplicationController
+  include CategoriesHelper
 
   def index
-    @categories = Category.all
+    @all_categories = MultiCategoriesPresenter.new(Category.all)
   end
 
   def new
     @category = Category.new
+  end
+
+  def show
+    category = Category.find(params[:id])
+    @category = CategoriesPresenter.new(category)
   end
 
   def edit

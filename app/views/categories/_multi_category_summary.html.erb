@@ -1,0 +1,27 @@
+<% classes ||= "" %>
+
+<%= content_tag :div, class: classes do %>
+  <h3>
+    <%= categories[:type].pluralize(categories[:type]) %>
+  </h3>
+
+  <ul>
+    <% categories[:all].each do |category| %>
+      <li>
+        <%= link_to category.name, category_url(category.id) %> (<%= category.balance[:total] %>, <%= category.balance[:state] %>) - <%= category.description %>
+        </li>
+    <% end %>
+  </ul>
+
+  <h5>
+    Total: <%= number_to_currency(categories[:total]) %>
+  </h5>
+
+  <h5>
+    Expected: <%= number_to_currency(categories[:expected]) %>
+  </h5>
+
+  <h5>
+    Balance: <%= number_to_currency(categories[:balance]) %>
+  </h5>
+<% end %>

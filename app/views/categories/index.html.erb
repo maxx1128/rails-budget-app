@@ -4,21 +4,26 @@
   Categories!
 </h1>
 
-<% if @categories.length > 0 %>
-  <ul>
-    <% @categories.each do |category| %>
-      <li><%= category.name %> ($<%= category.budget %>) - <%= category.description %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <h3>
-    No categories :(
-  </h3>
-<% end %>
+<div class="ba-flex ba-flex-wrap ba-flex-nowrap-md">
+  <% if @all_categories.expense[:all].length > 0 %>
+    <%= render 'multi_category_summary', categories: @all_categories.expense, classes: "ba-flex-item ba-flex-basis-6-md ba-mb-double ba-mb-none-md ba-mr-double-md" %>
+  <% end %>
 
-<p>
-  <%= link_to "Add a new category!", "/categories/new/" %>
-</p>
-<p>
-  <%= link_to "Edit your categories!", "/categories/edit/" %>
-</p>
+  <% if @all_categories.income[:all].length > 0 %>
+    <%= render 'multi_category_summary', categories: @all_categories.income, classes: "ba-flex-item ba-flex-basis-6-md" %>
+  <% end %>
+</div>
+
+<h5 class="ba-pt-double">
+  Final Balance: <%= @all_categories.final_balance[:total] %> (<%= @all_categories.final_balance[:state] %>)
+</h5>
+
+
+<div class="ba-pt-double">
+  <p>
+    <%= link_to "Add a new category!", "/categories/new/" %>
+  </p>
+  <p>
+    <%= link_to "Edit your categories!", "/categories/edit/" %>
+  </p>
+</div>

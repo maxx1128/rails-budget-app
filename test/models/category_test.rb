@@ -3,7 +3,7 @@ require 'test_helper'
 class CategoryTest < ActiveSupport::TestCase
   
   def setup
-    @category = Category.new(name: "Food", budget: 200, description: "Lorem ipsum dolor!")
+    @category = categories(:food)
   end
 
   test "should be valid" do

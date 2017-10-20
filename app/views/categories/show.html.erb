@@ -1,0 +1,33 @@
+<% provide(:title, "#{@category.name} Category") %>
+
+<h1>
+  <%= @category.name %>
+</h1>
+
+<h3>
+  <%= @category.type %>
+</h3>
+
+<p>
+  <%= @category.description %>
+</p>
+
+<ul>
+  <% @category.expenses.each do |expense| %>
+    <li>
+      <%= expense.name %> (<%= number_to_currency(expense.value) %>) = <%= expense.description %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>
+  Total: <%= @category.total %>
+</h4>
+
+<h4>
+  Budget: <%= number_to_currency(@category.budget) %>
+</h4>
+
+<h4>
+  Category Balance: <%= @category.balance[:total] %> (<%= @category.balance[:state] %>)
+</h4>

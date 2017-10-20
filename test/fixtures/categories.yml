@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: Rent
-
-two:
-  name: Clothes
+food:
+  name: Food
+  budget: 200
+  description: "Lorem ipsum dolor!"
