@@ -38,7 +38,11 @@ class CategoriesPresenter < BasePresenter
   end
 
   def balance
-    total = @category.budget - category_total(@category.expenses)
+    if @category.expense
+      total = @category.budget - category_total(@category.expenses)
+    else
+      total = category_total(@category.expenses) - @category.budget
+    end
 
     {
       :total => h.number_to_currency(total),

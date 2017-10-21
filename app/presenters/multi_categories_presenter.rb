@@ -18,7 +18,7 @@ class MultiCategoriesPresenter < BasePresenter
   end
 
   def balances_calculator(type)
-    if type == "expense"
+    if type == "Expense"
       categories = all_categories.select { |cat| cat.expense }
     else
       categories = all_categories.select { |cat| !cat.expense }
@@ -33,7 +33,7 @@ class MultiCategoriesPresenter < BasePresenter
       total += category_total(cat.expenses)
     end
 
-    if type == "expense"
+    if type == "Expense"
       balance = expected - total
     else
       balance = total - expected
@@ -52,11 +52,11 @@ class MultiCategoriesPresenter < BasePresenter
   end
 
   def expense
-    balances_calculator("expense")
+    balances_calculator("Expense")
   end
 
   def income
-    balances_calculator("income")
+    balances_calculator("Income")
   end
 
   def final_balance
