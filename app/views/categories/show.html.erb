@@ -21,7 +21,7 @@
 </ul>
 
 <h4>
-  Total: <%= @category.total %>
+  Total: <%= number_to_currency(@category.total) %>
 </h4>
 
 <h4>
@@ -29,5 +29,5 @@
 </h4>
 
 <h4>
-  Category Balance: <%= @category.balance[:total] %> (<%= @category.balance[:state] %>)
+  Category Balance: <%= number_to_currency(@category.balance[:total]) %> (<%= @category.balance[:state] %>)
 </h4>

@@ -1,13 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  value: 1
-  category: one
+<% 5.times do |n| %>
+log_<%= n %>1:
+  name:  <%= "Food #{n}" %>
+  value: 70
+  description: "Lorem Ipsum Dolor!"
+  category: food
 
-two:
-  name: MyString
-  description: MyText
-  value: 1
-  category: two
+log_<%= n %>2:
+  name:  <%= "Rent #{n}" %>
+  value: 100
+  description: "Lorem Ipsum Dolor!"
+  category: rent
+
+log_<%= n %>3:
+  name:  <%= "Salary #{n}" %>
+  value: 350
+  description: "Lorem Ipsum Dolor!"
+  category: salary
+
+log_<%= n %>4:
+  name:  <%= "Interest #{n}" %>
+  value: 50
+  description: "Lorem Ipsum Dolor!"
+  category: interest
+<% end %>

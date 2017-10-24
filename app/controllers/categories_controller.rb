@@ -25,7 +25,8 @@ class CategoriesController < ApplicationController
     if @category.save
       flash[:success] = "Category added!"
       redirect_to categories_url
-    else
+    else 
+      flash[:failure] = "Failed to add category!"
       render '/categories/new/'
     end
   end

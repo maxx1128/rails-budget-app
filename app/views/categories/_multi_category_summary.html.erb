@@ -8,7 +8,7 @@
   <ul>
     <% categories[:all].each do |category| %>
       <li>
-        <%= link_to category.name, category_url(category.id) %> (<%= category.balance[:total] %>, <%= category.balance[:state] %>) - <%= category.description %>
+        <%= link_to category.name, category_url(category.id) %> (<%= number_to_currency(category.balance[:total]) %>, <%= category.balance[:state] %>) - <%= category.description %>
         </li>
     <% end %>
   </ul>

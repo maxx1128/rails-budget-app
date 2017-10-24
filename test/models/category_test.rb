@@ -47,4 +47,9 @@ class CategoryTest < ActiveSupport::TestCase
     @category.budget = 0
     assert_not @category.valid?
   end
+
+  test "budget shouldn't be negative" do
+    @category.budget = -200
+    assert_not @category.valid?
+  end
 end

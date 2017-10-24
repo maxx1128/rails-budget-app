@@ -1,7 +1,8 @@
 class MultiCategoriesPresenter < BasePresenter
   include CategoriesHelper
-
   include Enumerable
+
+  attr_reader :expense, :income, :final_balance
 
   def initialize(multi_category)
     @multi_category = multi_category
@@ -13,9 +14,32 @@ class MultiCategoriesPresenter < BasePresenter
     end
   end
 
+  def length
+    all_categories.length
+  end
+
   def each(&block)
     all_categories.each(&block)
   end
+
+  def expense
+    balances_calculator("Expense")
+  end
+
+  def income
+    balances_calculator("Income")
+  end
+
+  def final_balance
+    balance = expense[:balance] + income[:balance]
+
+    {
+      :total => balance,
+      :state => check_state(balance)
+    }
+  end
+
+  private
 
   def balances_calculator(type)
     if type == "Expense"
@@ -50,25 +74,6 @@ class MultiCategoriesPresenter < BasePresenter
       :status => status
     }
   end
-
-  def expense
-    balances_calculator("Expense")
-  end
-
-  def income
-    balances_calculator("Income")
-  end
-
-  def final_balance
-    balance = expense[:balance] + income[:balance]
-
-    {
-      :total => h.number_to_currency(balance),
-      :state => check_state(balance)
-    }
-  end
-
-  private
 
   def all_categories
     @presented_category ||= @multi_category.map { |cat| CategoriesPresenter.new(cat) }

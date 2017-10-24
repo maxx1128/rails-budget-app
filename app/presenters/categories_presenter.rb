@@ -18,7 +18,7 @@ class CategoriesPresenter < BasePresenter
   end
 
   def total
-    h.number_to_currency(category_total(@category.expenses))
+    category_total(@category.expenses)
   end
 
   def budget
@@ -45,7 +45,7 @@ class CategoriesPresenter < BasePresenter
     end
 
     {
-      :total => h.number_to_currency(total),
+      :total => total,
       :state => check_state(total)
     }
   end

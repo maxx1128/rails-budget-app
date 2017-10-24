@@ -1,6 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 food:
+
   name: Food
-  budget: 200
+  expense: true
+  budget: 300
   description: "Lorem ipsum dolor!"
+
+rent:
+  name: Rent
+  expense: true
+  budget: 1100
+  description: "Lorem ipsum dolor!"
+
+salary:
+  name: Salary
+  expense: false
+  budget: 1500
+  description: "Lorem ipsum dolor!"
+
+interest:
+  name: Bank Interest
+  expense: false
+  budget: 1600
+  description: "Lorem ipsum dolor!"
+
