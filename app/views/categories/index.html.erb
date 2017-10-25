@@ -1,7 +1,7 @@
-<% provide(:title, "All Categories") %>
+<% provide(:title, @title ||= "All Categories") %>
 
 <h1>
-  Categories!
+  <%= yield(:title) %>
 </h1>
 
 <div class="ba-flex ba-flex-wrap ba-flex-nowrap-md">
@@ -15,7 +15,11 @@
 </div>
 
 <h5 class="ba-pt-double">
-  Final Balance: <%= number_to_currency(@all_categories.final_balance[:total]) %> (<%= @all_categories.final_balance[:state] %>)
+  Monthly Balance: <%= number_to_currency(@all_categories.final_balance[:balance]) %> (<%= @all_categories.final_balance[:balance_state] %>)
+</h5>
+
+<h5 class="ba-pt-double">
+  Monthly Profit: <%= number_to_currency(@all_categories.final_balance[:profit]) %> (<%= @all_categories.final_balance[:profit_state] %>)
 </h5>
 
 

@@ -4,8 +4,10 @@ class MultiCategoriesPresenter < BasePresenter
 
   attr_reader :expense, :income, :final_balance
 
-  def initialize(multi_category)
+  def initialize(multi_category, start_date, end_date)
     @multi_category = multi_category
+    @start_date = start_date
+    @end_date = end_date
   end
 
   class << self
@@ -32,10 +34,14 @@ class MultiCategoriesPresenter < BasePresenter
 
   def final_balance
     balance = expense[:balance] + income[:balance]
+    profit = income[:total] - expense[:total]
 
     {
-      :total => balance,
-      :state => check_state(balance)
+      :balance => balance,
+      :balance_state => check_state(balance),
+      
+      :profit => profit,
+      :profit_state => check_state(profit)
     }
   end
 
@@ -76,6 +82,6 @@ class MultiCategoriesPresenter < BasePresenter
   end
 
   def all_categories
-    @presented_category ||= @multi_category.map { |cat| CategoriesPresenter.new(cat) }
+    @presented_category ||= @multi_category.map { |cat| CategoriesPresenter.new(cat, @start_date, @end_date) }
   end
 end

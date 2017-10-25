@@ -7,12 +7,21 @@
                    expense: Faker::Boolean.boolean)
 end
 
+
+
 all_categories = Category.all
 
 all_categories.each do |category|
-  10.times do
-    category.expenses.create!( name: Faker::Zelda.character,
-                               description: Faker::Seinfeld.quote,
-                               value: Faker::Number.between(30, 50) )
+
+  24.times do |n|
+
+    created_at_date = (n-1).months.ago
+
+    10.times do
+      category.expenses.create!( name: Faker::Zelda.character,
+                                 description: Faker::Seinfeld.quote,
+                                 value: Faker::Number.between(30, 50),
+                                 created_at: created_at_date)
+    end
   end
 end

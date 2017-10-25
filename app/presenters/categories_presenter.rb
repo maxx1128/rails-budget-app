@@ -9,16 +9,33 @@ class CategoriesPresenter < BasePresenter
            :length,
            :budget, to: :@category
 
-  def initialize(category = nil)
+  def initialize(category = nil, start_date = nil, end_date = nil)
     @category = category
+    @start_date = start_date
+    @end_date = end_date
   end
 
   def id
     @category.id
   end
 
+  def date_link
+    year = @start_date.strftime("%Y")
+    month = @start_date.strftime("%-m")
+
+    "#{year}/#{month}/#{@category.id}"
+  end
+
+  def created_at
+    @category.created_at
+  end
+
+  def expenses
+    @category.expenses.select { |expense| expense.created_at.between?(@start_date, @end_date) }
+  end
+
   def total
-    category_total(@category.expenses)
+    category_total(expenses)
   end
 
   def budget
@@ -39,9 +56,9 @@ class CategoriesPresenter < BasePresenter
 
   def balance
     if @category.expense
-      total = @category.budget - category_total(@category.expenses)
+      total = @category.budget - category_total(expenses)
     else
-      total = category_total(@category.expenses) - @category.budget
+      total = category_total(expenses) - @category.budget
     end
 
     {

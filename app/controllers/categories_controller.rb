@@ -10,8 +10,21 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    time = get_time_info(params[:year], params[:month])
     category = Category.find(params[:id])
-    @category = CategoriesPresenter.new(category)
+
+    @title = "Budget for Category on #{time[:month_name]}, #{time[:year]}"
+    @category = CategoriesPresenter.new(category, time[:start_date], time[:end_date])
+  end
+
+  def month
+    time = get_time_info(params[:year], params[:month])
+    categories = Category.all
+
+    @all_categories = MultiCategoriesPresenter.new(categories, time[:start_date], time[:end_date])
+
+    @title = "Budget for #{time[:month_name]}, #{time[:year]}"
+    render '/categories/index'
   end
 
   def edit
@@ -48,6 +61,20 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def get_time_info(url_year, url_month)
+    year = url_year.to_i
+    month = url_month.to_i
+    start_date = DateTime.new(year, month, 1)
+
+    {
+      :year => year,
+      :start_date => start_date,
+      :end_date => start_date + 1.month,
+      :month_name => start_date.strftime("%B")
+    }
+  end
+
   def category_params
     params.require(:category).permit(:name, :budget, :description)
   end
