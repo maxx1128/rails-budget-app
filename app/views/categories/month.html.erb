@@ -1,0 +1,33 @@
+<% provide(:title, @title ||= "All Categories") %>
+
+<h1>
+  <%= yield(:title) %>
+</h1>
+
+<div class="ba-flex ba-flex-wrap ba-flex-nowrap-md">
+  <% if @all_categories.expense[:all].length > 0 %>
+    <%= render 'multi_category_summary', categories: @all_categories.expense, classes: "ba-flex-item ba-flex-basis-6-md ba-mb-double ba-mb-none-md ba-mr-double-md" %>
+  <% end %>
+
+  <% if @all_categories.income[:all].length > 0 %>
+    <%= render 'multi_category_summary', categories: @all_categories.income, classes: "ba-flex-item ba-flex-basis-6-md" %>
+  <% end %>
+</div>
+
+<h5 class="ba-pt-double">
+  Monthly Balance: <%= number_to_currency(@all_categories.final_balance[:balance]) %> (<%= @all_categories.final_balance[:balance_state] %>)
+</h5>
+
+<h5 class="ba-pt-double">
+  Monthly Profit: <%= number_to_currency(@all_categories.final_balance[:profit]) %> (<%= @all_categories.final_balance[:profit_state] %>)
+</h5>
+
+
+<div class="ba-pt-double">
+  <p>
+    <%= link_to "Add a new category!", "/categories/new/" %>
+  </p>
+  <p>
+    <%= link_to "Edit your categories!", "/categories/edit/" %>
+  </p>
+</div>

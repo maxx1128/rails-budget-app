@@ -45,6 +45,29 @@ class MultiCategoriesPresenter < BasePresenter
     }
   end
 
+  def diff_date_ranges
+    date_ranges = []
+    income_cats = income[:all]
+    expense_cats = expense[:all]
+
+    all_cats = income_cats.zip(expense_cats).flatten.compact
+
+    all_cats.each do |category|
+      category.expenses.each do |exp|
+        month = exp.created_at.strftime("%-m")
+        year = exp.created_at.strftime("%Y")
+        month_name = exp.created_at.strftime("%B")
+        
+        date_info = { :date => "#{year}/#{month}",
+                      :label => "#{month_name} #{year}" }
+
+        date_ranges.push(date_info)
+      end
+    end
+
+    date_ranges.uniq
+  end
+
   private
 
   def balances_calculator(type)

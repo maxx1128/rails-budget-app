@@ -2,7 +2,11 @@ class CategoriesController < ApplicationController
   include CategoriesHelper
 
   def index
-    @all_categories = MultiCategoriesPresenter.new(Category.all)
+    begin_time = DateTime.new(1000, 1, 1)
+    end_time = DateTime.new(9999, 1, 1)
+    
+    @title = "Categories"
+    @calendar = MultiCategoriesPresenter.new(Category.all, begin_time, end_time)
   end
 
   def new
@@ -24,7 +28,7 @@ class CategoriesController < ApplicationController
     @all_categories = MultiCategoriesPresenter.new(categories, time[:start_date], time[:end_date])
 
     @title = "Budget for #{time[:month_name]}, #{time[:year]}"
-    render '/categories/index'
+    render '/categories/month'
   end
 
   def edit
