@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/categories/:year/:month/:id', to: 'categories#show'
 
   resources :categories
+  resources :expenses
 end

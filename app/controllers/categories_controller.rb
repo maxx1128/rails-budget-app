@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @categories = Category.all
+    @categories = Category.all.order({ expense: :desc })
     render '/categories/edit'
   end
 
