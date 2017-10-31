@@ -1,4 +1,5 @@
 class ExpensesController < ApplicationController
+  include ExpensesHelper
 
   def new
     @expense = Expense.new
@@ -14,27 +15,40 @@ class ExpensesController < ApplicationController
       @expense.created_at = new_date
       @expense.save
 
-      category_id = @expense.category.id
+      category_url = get_expense_category_page(@expense)
       
       flash[:success] = "Expense added!"
-      redirect_to "/categories/#{year}/#{month}/#{category_id}/"
+      redirect_to category_url
     else
       flash[:failure] = "Expense failed to add"
       render '/expenses/new/'
     end
   end
 
+  def edit
+    @expense = Expense.find(params[:id])
+  end
+
   def update
     @expense = Expense.find(params[:id])
+    category_url = get_expense_category_page(@expense)
+    
     if @expense.update_attributes(expense_params)
       flash[:success] = "Expense updated!"
-      redirect_to categories_url
     else
-      render "/expenses/update/"
+      flash[:failure] = "Expense failed to update!"
     end
+
+    redirect_to category_url
   end
 
   def destroy
+    @expense = Expense.find(params[:id])
+    category_url = get_expense_category_page(@expense)
+    @expense.destroy
+    
+    flash[:success] = "Expense deleted!"
+    redirect_to category_url
   end
 
   private

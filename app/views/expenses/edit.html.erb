@@ -1,0 +1,38 @@
+<% provide(:title, @title ||= "Edit Expense") %>
+
+<h2>
+  <%= @title %>
+</h2>
+
+<%= form_for(@expense) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "Name" %>
+
+  <br><br>
+
+  <%= f.label :category_id %>
+  <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+
+  <br><br>
+
+  <%= f.label :value %>
+  <%= f.text_field :value, type: "number", placeholder: "Value" %>
+
+  <br><br>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, placeholder: "Description" %>
+
+  <br><br>
+
+  <%= select_month(Date.today, field_name: 'month') %>
+  <%= select_year(Time.now) %>
+
+  <br>
+
+  <%= f.submit "Update", class: "ba-btn" %>
+
+  <%= link_to "Delete", category, method: :delete, data: { confirm: "You sure?" }, class: "delete_expense" %>
+<% end %>

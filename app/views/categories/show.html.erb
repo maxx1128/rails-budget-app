@@ -16,7 +16,7 @@
 <ul>
   <% @category.expenses.each do |expense| %>
     <li>
-      <%= expense.name %> (<%= number_to_currency(expense.value) %>) = <%= expense.description %>
+      <%= expense.name %> (<%= number_to_currency(expense.value) %>) = <%= expense.description %> --- <%= link_to 'Edit', "/expenses/#{expense.id}/edit" %> | <%= link_to "Delete", expense, method: :delete, data: { confirm: "You sure?" }, class: "expense" %>
     </li>
   <% end %>
 </ul>
