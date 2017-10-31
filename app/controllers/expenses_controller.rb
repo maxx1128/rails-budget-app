@@ -13,9 +13,11 @@ class ExpensesController < ApplicationController
       new_date = DateTime.new(year, month, 1)
       @expense.created_at = new_date
       @expense.save
+
+      category_id = @expense.category.id
       
       flash[:success] = "Expense added!"
-      redirect_to categories_url
+      redirect_to "/categories/#{year}/#{month}/#{category_id}/"
     else
       flash[:failure] = "Expense failed to add"
       render '/expenses/new/'
