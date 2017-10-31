@@ -32,3 +32,7 @@
 <h4>
   Category Balance: <%= number_to_currency(@category.balance[:total]) %> (<%= @category.balance[:state] %>)
 </h4>
+
+<hr>
+
+<%= link_to "Back to Month's Budget", @category.month_link %>

@@ -26,6 +26,13 @@ class CategoriesPresenter < BasePresenter
     "#{year}/#{month}/#{@category.id}"
   end
 
+  def month_link
+    year = @start_date.strftime("%Y")
+    month = @start_date.strftime("%-m")
+
+    "/categories/#{year}/#{month}/"
+  end
+
   def created_at
     @category.created_at
   end
