@@ -1,5 +1,6 @@
 class ExpensesController < ApplicationController
   include ExpensesHelper
+  before_action :logged_in_user
 
   def new
     @expense = Expense.new

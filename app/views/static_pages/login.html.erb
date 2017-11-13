@@ -1,0 +1,9 @@
+<% provide(:title, "Please log in!") %>
+
+<%= form_for(@password) do |f| %>
+
+  <%= f.label :password %>
+  <%= f.text_field :password, placeholder: "Password here" %>
+
+  <%= f.submit "Post", class: "ba-btn" %>
+<% end %>

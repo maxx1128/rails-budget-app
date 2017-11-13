@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
+  get '/login', to: "static_pages#login"
+  post '/login', to: "static_pages#login_post"
+
   get '/all-months', to: 'categories#index'
 
   get '/categories/edit', to: 'categories#edit'
