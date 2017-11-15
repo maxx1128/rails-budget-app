@@ -16,7 +16,7 @@ class CategoriesPresenter < BasePresenter
   end
 
   def id
-    @category.id
+    @category.id.to_i
   end
 
   def created_at

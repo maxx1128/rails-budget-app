@@ -35,7 +35,9 @@
 
 <hr>
 
-<%= link_to "Add expense to this category and month specifically?", "javascript:void(0);" %>
+<p>
+  <%= link_to "Add expense to this category and month", "#{request.original_url}/new_expense" %>
+</p>
 
 <br>
 

@@ -13,7 +13,7 @@
   <br><br>
 
   <%= f.label :category_id %>
-  <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+  <%= f.collection_select :category_id, Category.order(:name), :id, :name, include_blank: false, selected: @exp_preset[:category] %>
 
   <br><br>
 
@@ -27,8 +27,13 @@
 
   <br><br>
 
-  <%= select_month(Date.today, field_name: 'month') %>
-  <%= select_year(Time.now) %>
+  <% if @exp_preset.present? %>
+    <%= select_month(@exp_preset[:date], field_name: 'month') %>
+    <%= select_year(@exp_preset[:date]) %>
+  <% else %>
+    <%= select_month(Date.today, field_name: 'month') %>
+    <%= select_year(Time.now) %>
+  <% end %>
 
   <br>
 
