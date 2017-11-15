@@ -32,7 +32,8 @@ class CategoriesPresenter < BasePresenter
   end
 
   def expenses
-    @category.expenses.select { |expense| expense.created_at.between?(@start_date, @end_date) }
+    expenses = @category.expenses.select { |expense| expense.created_at.between?(@start_date, @end_date) }.sort_by &:value
+    expenses.reverse
   end
 
   def type

@@ -32,6 +32,24 @@ class MultiCategoriesPresenter < BasePresenter
     balances_calculator("Income")
   end
 
+  def all_expenses
+    expenses = []
+
+    all_categories.each do |cat|
+      cat.expenses.each do |exp|  
+        expenses.push(exp)
+      end      
+    end
+
+    expenses
+  end
+
+  def top_expenses
+    expenses = all_expenses.sort_by &:value
+
+    expenses.reverse[0..4]
+  end
+
   def final_balance
     balance = expense[:balance] + income[:balance]
     profit = income[:total] - expense[:total]

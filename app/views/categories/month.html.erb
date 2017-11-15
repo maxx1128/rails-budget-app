@@ -14,11 +14,24 @@
   <% end %>
 </div>
 
-<h5 class="ba-pt-double">
+
+<h5 class="ba-pt-base">
+  Largest expenses
+</h5>
+
+<ul>
+  <% @all_categories.top_expenses.each do |exp| %>
+    <li>
+       <%= number_to_currency(exp.value) %> for <%= exp.name %> in <%= link_to exp.category.name, "/categories/#{params[:year]}/#{params[:month]}/#{exp.category.id}" %>
+    </li>
+  <% end %>
+</ul>
+
+<h5 class="ba-pt-base">
   Monthly Balance: <%= number_to_currency(@all_categories.final_balance[:balance]) %> (<%= @all_categories.final_balance[:balance_state] %>)
 </h5>
 
-<h5 class="ba-pt-double">
+<h5 class="ba-pt-base">
   Monthly Profit: <%= number_to_currency(@all_categories.final_balance[:profit]) %> (<%= @all_categories.final_balance[:profit_state] %>)
 </h5>
 
