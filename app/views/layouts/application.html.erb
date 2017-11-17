@@ -16,8 +16,14 @@
 
     <%= yield %>
 
-    <p>
-      <%= link_to "Add an expense", "/expenses/new/" %>
-    </p>
+    <div class="footer ba-mt-double">
+      <p>
+        <%= link_to "Add an expense", "/expenses/new/" %>
+      </p>
+
+      <small class="ba-italic">
+        <%= random_finance_quote %>
+      </small>
+    </div>
   </body>
 </html>
