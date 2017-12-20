@@ -3,6 +3,8 @@ class CategoriesController < ApplicationController
   before_action :logged_in_user
 
   def index
+    # TestMailer.header_test('Hello there header!').deliver_now
+
     begin_time = DateTime.new(1000, 1, 1)
     end_time = DateTime.new(9999, 1, 1)
     

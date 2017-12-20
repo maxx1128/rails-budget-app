@@ -1,5 +1,4 @@
 class CategoriesPresenter < BasePresenter
-  include CategoriesHelper
 
   delegate :category,
            :name, 
@@ -28,7 +27,7 @@ class CategoriesPresenter < BasePresenter
   end
 
   def total
-    category_total(expenses)
+    h.category_total(expenses)
   end
 
   def expenses
@@ -66,14 +65,14 @@ class CategoriesPresenter < BasePresenter
 
   def balance
     if @category.expense
-      total = @category.budget - category_total(expenses)
+      total = @category.budget - h.category_total(expenses)
     else
-      total = category_total(expenses) - @category.budget
+      total = h.category_total(expenses) - @category.budget
     end
 
     {
       :total => total,
-      :state => check_state(total)
+      :state => h.check_state(total)
     }
   end
 end

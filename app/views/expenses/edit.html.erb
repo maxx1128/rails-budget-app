@@ -27,8 +27,8 @@
 
   <br><br>
 
-  <%= select_month(Date.today, field_name: 'month') %>
-  <%= select_year(Time.now) %>
+  <%= select_month(@expense.created_at, field_name: 'month') %>
+  <%= select_year(@expense.created_at) %>
 
   <br>
 
