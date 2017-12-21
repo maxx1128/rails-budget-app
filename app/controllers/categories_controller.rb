@@ -17,20 +17,27 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    time = get_time_info(params[:year], params[:month])
-    category = Category.find(params[:id])
+    id = params[:id]
+    year = params[:year]
+    month = params[:month]
 
-    @title = "Budget for Category on #{time[:month_name]}, #{time[:year]}"
-    @category = CategoriesPresenter.new(category, time[:start_date], time[:end_date])
+    month_name = get_month_name(month)
+
+    @title = "Budget for Category on #{month_name}, #{year}"
+    @category = CategoryInMonthService.new(id, month, year)
   end
 
   def month
-    time = get_time_info(params[:year], params[:month])
+    year = params[:year]
+    month = params[:month]
+
+    month_dates = get_month_dates(year, month)
+    month_name = get_month_name(month)
     categories = Category.all
 
-    @all_categories = MultiCategoriesPresenter.new(categories, time[:start_date], time[:end_date])
+    @all_categories = MultiCategoriesPresenter.new(categories, month_dates.start, month_dates.end)
+    @title = "Budget for #{month_name}, #{year}"
 
-    @title = "Budget for #{time[:month_name]}, #{time[:year]}"
     render '/categories/month'
   end
 
@@ -68,19 +75,6 @@ class CategoriesController < ApplicationController
   end
 
   private
-
-  def get_time_info(url_year, url_month)
-    year = url_year.to_i
-    month = url_month.to_i
-    start_date = DateTime.new(year, month, 1)
-
-    {
-      :year => year,
-      :start_date => start_date,
-      :end_date => start_date + 1.month,
-      :month_name => start_date.strftime("%B")
-    }
-  end
 
   def category_params
     params.require(:category).permit(:name, :budget, :description)
