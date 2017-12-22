@@ -3,8 +3,8 @@ class MonthlyBalanceService < BaseService
     @month = month
     @year = year
 
-    @expenses = MonthlyGroupSummaryService.new(@month, @year, true)
-    @incomes = MonthlyGroupSummaryService.new(@month, @year, false)
+    @expenses = MonthlyCategoriesSummaryService.new(@month, @year, true)
+    @incomes = MonthlyCategoriesSummaryService.new(@month, @year, false)
   end
 
   def expenses

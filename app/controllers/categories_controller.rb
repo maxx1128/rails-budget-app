@@ -16,7 +16,6 @@ class CategoriesController < ApplicationController
     id = params[:id]
     year = params[:year]
     month = params[:month]
-
     month_name = get_month_name(month)
 
     @title = "Budget for Category on #{month_name}, #{year}"
@@ -26,16 +25,9 @@ class CategoriesController < ApplicationController
   def month
     year = params[:year]
     month = params[:month]
-
-    month_dates = get_month_dates(year, month)
     month_name = get_month_name(month)
-    categories = Category.all.includes(:expenses)
 
     @monthly = MonthlyBalanceService.new(month, year)
-
-    @expenses = @monthly.expenses
-    @incomes = @monthly.incomes
-
     @title = "Budget for #{month_name}, #{year}"
 
     render '/categories/month'
@@ -43,6 +35,7 @@ class CategoriesController < ApplicationController
 
   def edit
     @categories = Category.all.includes(:expenses).order({ expense: :desc })
+    
     render '/categories/edit'
   end
 

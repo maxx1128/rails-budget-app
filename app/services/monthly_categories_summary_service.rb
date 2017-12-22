@@ -1,4 +1,4 @@
-class MonthlyGroupSummaryService < BaseService
+class MonthlyCategoriesSummaryService < BaseService
 
   def initialize(month=nil, year=nil, type=nil)
     @month = month
@@ -15,6 +15,10 @@ class MonthlyGroupSummaryService < BaseService
 
   def type
     h.category_type(@type)
+  end
+
+  def type_p
+    type.pluralize(type)
   end
 
   def budget
