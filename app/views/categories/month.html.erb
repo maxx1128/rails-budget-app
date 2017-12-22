@@ -21,17 +21,17 @@
 <ul>
   <% @monthly.top_expenses.each do |exp| %>
     <li>
-       <%= number_to_currency(exp.value) %> for <%= exp.name %> in <%= link_to exp.category.name, "/categories/#{params[:year]}/#{params[:month]}/#{exp.category.id}" %>
+       <%= money(exp.value) %> for <%= exp.name %> in <%= link_to exp.category.name, "/categories/#{params[:year]}/#{params[:month]}/#{exp.category.id}" %>
     </li>
   <% end %>
 </ul>
 
 <h5 class="ba-pt-base">
-  Monthly Balance: <%= number_to_currency(@monthly.balance) %> (<%= @monthly.balance_state %>)
+  Monthly Balance: <%= money(@monthly.balance) %> (<%= @monthly.balance_state %>)
 </h5>
 
 <h5 class="ba-pt-base">
-  Monthly Profit: <%= number_to_currency(@monthly.profit) %> (<%= @monthly.profit_state %>)
+  Monthly Profit: <%= money(@monthly.profit) %> (<%= @monthly.profit_state %>)
 </h5>
 
 

@@ -17,10 +17,8 @@ module ApplicationHelper
     logged_in.present?
   end
 
-  def present(model, presenter_class=nil)
-    klass = presenter_class || "#{model.class}Presenter".constantize
-    presenter = klass.new(model, self)
-    yield(presenter) if block_given?
+  def money(number)
+    number_to_currency(number)
   end
 
   def random_finance_quote
@@ -37,9 +35,5 @@ module ApplicationHelper
     ]
 
     "\"#{quotes.sample}\""
-  end
-
-  def h
-    ApplicationController.helpers
   end
 end

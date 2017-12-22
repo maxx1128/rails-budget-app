@@ -16,21 +16,21 @@
 <ul>
   <% @category.expenses.each do |expense| %>
     <li>
-      <%= expense.name %> (<%= number_to_currency(expense.value) %>) = <%= expense.description %> --- <%= link_to 'Edit', "/expenses/#{expense.id}/edit" %> | <%= link_to "Delete", expense, method: :delete, data: { confirm: "You sure?" }, class: "expense" %>
+      <%= expense.name %> (<%= money(expense.value) %>) = <%= expense.description %> --- <%= link_to 'Edit', "/expenses/#{expense.id}/edit" %> | <%= link_to "Delete", expense, method: :delete, data: { confirm: "You sure?" }, class: "expense" %>
     </li>
   <% end %>
 </ul>
 
 <h4>
-  Total: <%= number_to_currency(@category.total) %>
+  Total: <%= money(@category.total) %>
 </h4>
 
 <h4>
-  Budget: <%= number_to_currency(@category.budget) %>
+  Budget: <%= money(@category.budget) %>
 </h4>
 
 <h4>
-  Category Balance: <%= number_to_currency(@category.balance_total) %> (<%= @category.balance_state %>)
+  Category Balance: <%= money(@category.balance_total) %> (<%= @category.balance_state %>)
 </h4>
 
 <hr>
