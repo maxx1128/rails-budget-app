@@ -5,22 +5,70 @@
 </h1>
 
 <div class="ba-flex ba-flex-wrap ba-flex-nowrap-md">
-  <% if @all_categories.expense[:all].length > 0 %>
-    <%= render 'multi_category_summary', categories: @all_categories.expense, classes: "ba-flex-item ba-flex-basis-6-md ba-mb-double ba-mb-none-md ba-mr-double-md" %>
+  <% if @expenses.categories.length > 0 %>
+
+    <div class="ba-flex-item ba-flex-basis-6-md ba-mb-double ba-mb-none-md ba-mr-double-md">
+      <h3>
+        <%= @expenses.type %>
+      </h3>
+
+      <ul>
+        <% @expenses.categories.each do |category| %>
+          <li>
+            <%= link_to category.name, "/categories/#{category.date_link}" %> (<%= number_to_currency(category.balance_total) %>, <%= category.balance_state %>) - <%= category.description %>
+            </li>
+        <% end %>
+      </ul>
+
+      <h5>
+        Total: <%= number_to_currency(@expenses.total) %>
+      </h5>
+
+      <h5>
+        Budget: <%= number_to_currency(@expenses.budget) %>
+      </h5>
+
+      <h5>
+        Balance: <%= number_to_currency(@expenses.balance) %>
+      </h5>
+    </div>
   <% end %>
 
-  <% if @all_categories.income[:all].length > 0 %>
-    <%= render 'multi_category_summary', categories: @all_categories.income, classes: "ba-flex-item ba-flex-basis-6-md" %>
+    <% if @incomes.categories.length > 0 %>
+    <div class="ba-flex-item ba-flex-basis-6-md">
+      <h3>
+        <%= @incomes.type %>
+      </h3>
+
+      <ul>
+        <% @incomes.categories.each do |category| %>
+          <li>
+            <%= link_to category.name, "/categories/#{category.date_link}" %> (<%= number_to_currency(category.balance_total) %>, <%= category.balance_state %>) - <%= category.description %>
+            </li>
+        <% end %>
+      </ul>
+
+      <h5>
+        Total: <%= number_to_currency(@incomes.total) %>
+      </h5>
+
+      <h5>
+        Budget: <%= number_to_currency(@incomes.budget) %>
+      </h5>
+
+      <h5>
+        Balance: <%= number_to_currency(@incomes.balance) %>
+      </h5>
+    </div>
   <% end %>
 </div>
-
 
 <h5 class="ba-pt-base">
   Largest expenses
 </h5>
 
 <ul>
-  <% @all_categories.top_expenses.each do |exp| %>
+  <% @monthly.top_expenses.each do |exp| %>
     <li>
        <%= number_to_currency(exp.value) %> for <%= exp.name %> in <%= link_to exp.category.name, "/categories/#{params[:year]}/#{params[:month]}/#{exp.category.id}" %>
     </li>
@@ -28,11 +76,11 @@
 </ul>
 
 <h5 class="ba-pt-base">
-  Monthly Balance: <%= number_to_currency(@all_categories.final_balance[:balance]) %> (<%= @all_categories.final_balance[:balance_state] %>)
+  Monthly Balance: <%= number_to_currency(@monthly.balance) %> (<%= @monthly.balance_state %>)
 </h5>
 
 <h5 class="ba-pt-base">
-  Monthly Profit: <%= number_to_currency(@all_categories.final_balance[:profit]) %> (<%= @all_categories.final_balance[:profit_state] %>)
+  Monthly Profit: <%= number_to_currency(@monthly.profit) %> (<%= @monthly.profit_state %>)
 </h5>
 
 

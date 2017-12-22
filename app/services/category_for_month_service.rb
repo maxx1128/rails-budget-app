@@ -1,4 +1,4 @@
-class CategoryInMonthService < BaseService
+class CategoryForMonthService < BaseService
 
   delegate :category,
            :name, 
@@ -13,7 +13,6 @@ class CategoryInMonthService < BaseService
   def initialize(id=nil, month=nil, year=nil)
     @start_date = DateTime.new(year.to_i, month.to_i, 1)
     @end_date = @start_date + 1.month
-    month_name = @start_date.strftime("%B")
 
     @category = Category.find(id)
   end

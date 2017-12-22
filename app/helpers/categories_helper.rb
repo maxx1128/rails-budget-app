@@ -33,7 +33,7 @@ module CategoriesHelper
   end
 
   def category_type(category)
-    if expense then "Expense" else "Income" end
+    if category then "Expense" else "Income" end
   end
 end
 

@@ -4,12 +4,8 @@ class CategoriesController < ApplicationController
 
   def index
     # TestMailer.header_test('Hello there header!').deliver_now
-
-    begin_time = DateTime.new(1000, 1, 1)
-    end_time = DateTime.new(9999, 1, 1)
-    
-    @title = "Categories"
-    @calendar = MultiCategoriesPresenter.new(Category.all, begin_time, end_time)
+    @dates = AllCategoryMonthsService.new
+    @title = "All Months"
   end
 
   def new
@@ -24,7 +20,7 @@ class CategoriesController < ApplicationController
     month_name = get_month_name(month)
 
     @title = "Budget for Category on #{month_name}, #{year}"
-    @category = CategoryInMonthService.new(id, month, year)
+    @category = CategoryForMonthService.new(id, month, year)
   end
 
   def month
@@ -33,20 +29,24 @@ class CategoriesController < ApplicationController
 
     month_dates = get_month_dates(year, month)
     month_name = get_month_name(month)
-    categories = Category.all
+    categories = Category.all.includes(:expenses)
 
-    @all_categories = MultiCategoriesPresenter.new(categories, month_dates.start, month_dates.end)
+    @monthly = MonthlyBalanceService.new(month, year)
+
+    @expenses = @monthly.expenses
+    @incomes = @monthly.incomes
+
     @title = "Budget for #{month_name}, #{year}"
 
     render '/categories/month'
   end
 
   def edit
-    @categories = Category.all.order({ expense: :desc })
+    @categories = Category.all.includes(:expenses).order({ expense: :desc })
     render '/categories/edit'
   end
 
-  def create
+  def create 
     @category = Category.new(category_params)
 
     if @category.save
@@ -65,7 +65,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = Category.find(params[:id]) 
     if @category.update_attributes(category_params)
       flash[:success] = "Category updated!"
       redirect_to categories_url

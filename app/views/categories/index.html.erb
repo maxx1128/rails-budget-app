@@ -5,9 +5,9 @@
 </h1>
 
 <ul>
-  <% @calendar.diff_date_ranges.each do |date| %>
+  <% @dates.all.each do |date| %>
     <li>
-      <%= link_to date[:label], "/categories/#{date[:date]}" %>
+      <%= link_to date.label, date.link %>
     </li>
   <% end %>
 </ul>
