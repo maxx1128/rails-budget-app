@@ -4,7 +4,7 @@ class MonthlyCategoriesSummaryService < BaseService
     @month = month
     @year = year
     @type = type
-    @categories = MonthlyDataService.new(month, year, type)
+    @categories = MonthlyDataQuery.new(month, year, type)
   end
 
   def categories

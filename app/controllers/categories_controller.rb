@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     # TestMailer.header_test('Hello there header!').deliver_now
-    @dates = AllCategoryMonthsService.new
+    @dates = AllCategoryMonthsQuery.new
     @title = "All Months"
   end
 

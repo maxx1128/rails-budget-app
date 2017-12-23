@@ -1,4 +1,4 @@
-class AllCategoryMonthsService < BaseService
+class AllCategoryMonthsQuery < BaseQuery
   
   def initialize
     @categories = Category.includes(:expenses)

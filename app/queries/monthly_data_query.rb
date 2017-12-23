@@ -1,6 +1,6 @@
-class MonthlyDataService < BaseService
+class MonthlyDataQuery < BaseQuery
 
-  # MonthlyDataService.new(10, 2017, true)
+  # MonthlyDataQuery.new(10, 2017, true)
 
   def initialize(month=nil, year=nil, type=nil)
     @type = type
