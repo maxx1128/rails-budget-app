@@ -12,7 +12,7 @@ module CategoriesHelper
     fake_date.strftime("%B")
   end
 
-  def get_month_dates(year, month)
+  def get_month_dates(month, year)
     full_date = DateTime.new(year.to_i, month.to_i, 1)
 
     get_dates = Struct.new(:start) do

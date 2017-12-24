@@ -1,4 +1,5 @@
 class CategoryForMonthService < BaseService
+  include CategoriesHelper
 
   delegate :category,
            :name, 
@@ -11,8 +12,10 @@ class CategoryForMonthService < BaseService
            :budget, to: :@category
 
   def initialize(id=nil, month=nil, year=nil)
-    @start_date = DateTime.new(year.to_i, month.to_i, 1)
-    @end_date = @start_date + 1.month
+    dates = get_month_dates(month, year)
+
+    @start_date = dates.start
+    @end_date = dates.end
 
     @category = Category.find(id)
   end

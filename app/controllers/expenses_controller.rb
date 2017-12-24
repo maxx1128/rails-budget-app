@@ -7,20 +7,13 @@ class ExpensesController < ApplicationController
   end
 
   def new_in_category
-    @expense = Expense.new
-
-    # Put in hash, use hash as conditional render in view
-
-    category = Category.find(params[:id])
-
+    id = params[:id].to_i
     year = params[:year].to_i
     month = params[:month].to_i
-    expense_date = DateTime.new(year, month, 1)
-
-    @exp_preset = {
-      :category => category.id,
-      :date => expense_date
-    }
+    
+    @expense = Expense.new
+    @expense_date = expense_date(month, year)
+    @category_id = id
 
     render '/expenses/new/'
   end
@@ -31,7 +24,8 @@ class ExpensesController < ApplicationController
     if @expense.save
       year = params[:date][:year].to_i
       month = params[:date][:month].to_i
-      new_date = DateTime.new(year, month, 1)
+      
+      new_date = expense_date(month, year)
       @expense.created_at = new_date
       @expense.save
 

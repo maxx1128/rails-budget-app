@@ -6,4 +6,8 @@ module ExpensesHelper
 
     "/categories/#{year}/#{month}/#{category_id}/"
   end
+
+  def expense_date(month, year)
+    DateTime.new(year, month, 1)
+  end
 end
