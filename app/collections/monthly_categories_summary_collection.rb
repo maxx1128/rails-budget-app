@@ -1,4 +1,4 @@
-class MonthlyCategoriesSummaryService < BaseService
+class MonthlyCategoriesSummaryCollection < BaseCollection
 
   def initialize(month=nil, year=nil, type=nil)
     @month = month
@@ -9,7 +9,7 @@ class MonthlyCategoriesSummaryService < BaseService
 
   def categories
     @categories.categories.map do |category|
-      CategoryForMonthService.new(category.id, @month, @year)
+      CategoryForMonthCollection.new(category.id, @month, @year)
     end
   end
 

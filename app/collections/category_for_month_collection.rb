@@ -1,4 +1,4 @@
-class CategoryForMonthService < BaseService
+class CategoryForMonthCollection < BaseCollection
   include CategoriesHelper
 
   delegate :category,

@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     month_name = get_month_name(month)
 
     @title = "Budget for Category on #{month_name}, #{year}"
-    @category = CategoryForMonthService.new(id, month, year)
+    @category = CategoryForMonthCollection.new(id, month, year)
   end
 
   def month
@@ -27,7 +27,7 @@ class CategoriesController < ApplicationController
     month = params[:month]
     month_name = get_month_name(month)
 
-    @monthly = MonthlyBalanceService.new(month, year)
+    @monthly = MonthlyBalanceSummaryCollection.new(month, year)
     @title = "Budget for #{month_name}, #{year}"
 
     render '/categories/month'

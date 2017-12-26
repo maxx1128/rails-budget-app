@@ -1,10 +1,10 @@
-class MonthlyBalanceService < BaseService
+class MonthlyBalanceSummaryCollection < BaseCollection
   def initialize(month=nil, year=nil)
     @month = month
     @year = year
 
-    @expenses = MonthlyCategoriesSummaryService.new(@month, @year, true)
-    @incomes = MonthlyCategoriesSummaryService.new(@month, @year, false)
+    @expenses = MonthlyCategoriesSummaryCollection.new(@month, @year, true)
+    @incomes = MonthlyCategoriesSummaryCollection.new(@month, @year, false)
   end
 
   def expenses
